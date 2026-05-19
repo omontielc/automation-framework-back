@@ -8,8 +8,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import api.base.ATC01BaseApi;
-import api.models.request.ATC01APIOneRequest;
+import api.base.ApiOneBaseApi;
+import api.models.request.APIOneRequest;
 import api.models.response.APIOneResponse;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -21,16 +21,16 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
  * @author Osiris Montiel Campos
  * @version 2025-10-06
  */
-public class ATC01APIOneEndpoint {
+public class BookingEndpoint {
 
-    private static final Logger logger = LogManager.getLogger(ATC01APIOneEndpoint.class);
+    private static final Logger logger = LogManager.getLogger(BookingEndpoint.class);
     private static final String ENDPOINT = "/posts";
     
     //metodo para crear un post
-	public Response createe(ATC01APIOneRequest request) {
+	public Response createe(APIOneRequest request) {
 		try {
 			logger.info("POST {}", ENDPOINT);
-			return given().spec(ATC01BaseApi.requestSpec()).body(request).when().post(ENDPOINT);
+			return given().spec(ApiOneBaseApi.requestSpec()).body(request).when().post(ENDPOINT);
 		} catch (Exception e) {
 			logger.error("POST failed: {}", e.getMessage());
 			throw new RuntimeException("POST " + ENDPOINT + " failed", e);
@@ -51,7 +51,7 @@ public class ATC01APIOneEndpoint {
     public Response getAll() {
     	try {
             logger.info("GET {}", ENDPOINT);
-            return given().spec(ATC01BaseApi.requestSpec()).when().get(ENDPOINT);
+            return given().spec(ApiOneBaseApi.requestSpec()).when().get(ENDPOINT);
         } catch (Exception e) {
             logger.error("GET all posts failed: {}", e.getMessage());
             throw new RuntimeException("GET " + ENDPOINT + " failed", e);
@@ -72,7 +72,7 @@ public class ATC01APIOneEndpoint {
         }
         try {
             logger.info("GET {}/{}", ENDPOINT, id);
-            return given().spec(ATC01BaseApi.requestSpec()).when().get(ENDPOINT + "/" + id);
+            return given().spec(ApiOneBaseApi.requestSpec()).when().get(ENDPOINT + "/" + id);
         } catch (Exception e) {
             logger.error("GET by id failed for id {}: {}", id, e.getMessage());
             throw new RuntimeException("GET " + ENDPOINT + "/" + id + " failed", e);
@@ -93,7 +93,7 @@ public class ATC01APIOneEndpoint {
         }
         try {
             logger.info("GET {}?userId={}", ENDPOINT, userId);
-            return given().spec(ATC01BaseApi.requestSpec()).queryParam("userId", userId).when().get(ENDPOINT);
+            return given().spec(ApiOneBaseApi.requestSpec()).queryParam("userId", userId).when().get(ENDPOINT);
         } catch (Exception e) {
             logger.error("GET by userId failed for userId {}: {}", userId, e.getMessage());
             throw new RuntimeException("GET " + ENDPOINT + "?userId=" + userId + " failed", e);
@@ -106,13 +106,13 @@ public class ATC01APIOneEndpoint {
      * @param postRequest POJO that Jackson serializes to JSON automatically
      */
     @Step("POST create post — title: {postRequest.title}")
-    public Response create(ATC01APIOneRequest postRequest) {
+    public Response create(APIOneRequest postRequest) {
     	if (postRequest == null) {
             throw new IllegalArgumentException("Request body must not be null");
         }
         try {
             logger.info("POST {} — body: {}", ENDPOINT, postRequest.getTitle());
-            return given().spec(ATC01BaseApi.requestSpec()).body(postRequest).when().post(ENDPOINT);
+            return given().spec(ApiOneBaseApi.requestSpec()).body(postRequest).when().post(ENDPOINT);
         } catch (Exception e) {
             logger.error("POST failed — title: {}: {}", postRequest.getTitle(), e.getMessage());
             throw new RuntimeException("POST " + ENDPOINT + " failed", e);
@@ -127,7 +127,7 @@ public class ATC01APIOneEndpoint {
      * @return Response object
      */
     @Step("PUT update post id: {id}")
-    public Response update(int id, ATC01APIOneRequest postRequest) {
+    public Response update(int id, APIOneRequest postRequest) {
     	if (id <= 0) {
             throw new IllegalArgumentException(
                     "ID must be greater than 0 — received: " + id);
@@ -137,7 +137,7 @@ public class ATC01APIOneEndpoint {
         }
         try {
             logger.info("PUT {}/{}", ENDPOINT, id);
-            return given().spec(ATC01BaseApi.requestSpec()).body(postRequest).when().put(ENDPOINT + "/" + id);
+            return given().spec(ApiOneBaseApi.requestSpec()).body(postRequest).when().put(ENDPOINT + "/" + id);
         } catch (Exception e) {
             logger.error("PUT failed for id {}: {}", id, e.getMessage());
             throw new RuntimeException("PUT " + ENDPOINT + "/" + id + " failed", e);
@@ -158,7 +158,7 @@ public class ATC01APIOneEndpoint {
         }
         try {
             logger.info("DELETE {}/{}", ENDPOINT, id);
-            return given().spec(ATC01BaseApi.requestSpec()).when().delete(ENDPOINT + "/" + id);
+            return given().spec(ApiOneBaseApi.requestSpec()).when().delete(ENDPOINT + "/" + id);
         } catch (Exception e) {
             logger.error("DELETE failed for id {}: {}", id, e.getMessage());
             throw new RuntimeException("DELETE " + ENDPOINT + "/" + id + " failed", e);

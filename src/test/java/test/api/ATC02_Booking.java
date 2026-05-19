@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
-import api.endpoints.ATC01APIOneEndpoint;
-import api.models.request.ATC01APIOneRequest;
+import api.endpoints.APIOneEndpoint;
+import api.models.request.APIOneRequest;
 import api.models.response.APIOneResponse;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -28,7 +28,7 @@ import util.TestBase;
 @Feature("API Booking")
 public class ATC02_Booking extends TestBase {
 
-    private final ATC01APIOneEndpoint apiOne = new ATC01APIOneEndpoint();
+    private final APIOneEndpoint apiOne = new APIOneEndpoint();
 
     @Test
     @Story("Retrieve all apiOne")
@@ -97,7 +97,7 @@ public class ATC02_Booking extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     public void shouldCreatePost() {
     	int userId = apiOne.parseId(testData.getData("UserId", 1), "UserId");
-    	ATC01APIOneRequest request = new ATC01APIOneRequest("My first automated post", "This is the post body", userId);
+    	APIOneRequest request = new APIOneRequest("My first automated post", "This is the post body", userId);
         
         Response response = apiOne.create(request);
         APIOneResponse post = apiOne.deserialize(response);
@@ -112,7 +112,7 @@ public class ATC02_Booking extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     public void shouldUpdatePost() {
     	int id = Integer.parseInt(testData.getData("Id", 1));
-        ATC01APIOneRequest updated = new ATC01APIOneRequest("Updated title", "Updated body", id);
+        APIOneRequest updated = new APIOneRequest("Updated title", "Updated body", id);
 
         Response response = apiOne.update(id, updated);
         

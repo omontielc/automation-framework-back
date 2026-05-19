@@ -18,9 +18,9 @@ import io.restassured.specification.ResponseSpecification;
  * @author Osiris Montiel Campos
  * @version 2025-10-08
  */
-public class ATC01BaseApi {
+public class ApiOneBaseApi {
 
-    private static final Logger logger = LogManager.getLogger(ATC01BaseApi.class);
+    private static final Logger logger = LogManager.getLogger(ApiOneBaseApi.class);
 
     /**
      * Builds and returns the base.

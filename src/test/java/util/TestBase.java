@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.BeforeSuite;
 
-import api.base.ATC01BaseApi;
+import api.base.ApiOneBaseApi;
 
 /**
  * Base class for all API test classes.
@@ -37,7 +37,7 @@ public class TestBase {
     public void setupSuite() {
         logger.info("Initializing API test suite ");
         testData  = new TestData("Test", ATC_Name);
-        ATC01BaseApi.setup();
+        ApiOneBaseApi.setup();
         logger.info("API test suite initialized successfully");
     }
 }

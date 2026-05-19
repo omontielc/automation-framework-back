@@ -18,9 +18,9 @@ import io.restassured.specification.ResponseSpecification;
  * @author Osiris Montiel Campos
  * @version 2025-10-08
  */
-public class ATC02BaseApi {
+public class BookingBaseApi {
 
-    private static final Logger logger = LogManager.getLogger(ATC02BaseApi.class);
+    private static final Logger logger = LogManager.getLogger(BookingBaseApi.class);
 
     /**
      * Builds and returns the base.

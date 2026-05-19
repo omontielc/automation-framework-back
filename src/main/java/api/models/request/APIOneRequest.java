@@ -5,7 +5,7 @@ package api.models.request;
  * @author Osiris Montiel Campos
  * @version 2025-07-06
  */
-public class ATC01APIOneRequest {
+public class APIOneRequest {
 
     private String title;
     private String body;
@@ -17,7 +17,7 @@ public class ATC01APIOneRequest {
      * @param body   content of the post
      * @param userId ID of the user creating the post
      */
-    public ATC01APIOneRequest(String title, String body, int userId) {
+    public APIOneRequest(String title, String body, int userId) {
         this.title  = title;
         this.body   = body;
         this.userId = userId;
