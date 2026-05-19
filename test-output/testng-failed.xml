@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [API_Test_Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="API Tests(failed)">
+    <classes>
+      <class name="test.api.ATC01_Test1">
+        <methods>
+          <include name="setupSuite"/>
+          <include name="shouldManagePostLifecycle"/>
+        </methods>
+      </class> <!-- test.api.ATC01_Test1 -->
+    </classes>
+  </test> <!-- API Tests(failed) -->
+</suite> <!-- Failed suite [API_Test_Suite] -->
