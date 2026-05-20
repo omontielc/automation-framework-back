@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import api.base.ApiOneBaseApi;
+import api.base.BookingBaseApi;
 import api.models.request.APIOneRequest;
 import api.models.response.APIOneResponse;
 import io.qameta.allure.Step;
@@ -26,11 +27,16 @@ public class BookingEndpoint {
     private static final Logger logger = LogManager.getLogger(BookingEndpoint.class);
     private static final String ENDPOINT = "/posts";
     
-    //metodo para crear un post
-	public Response createe(APIOneRequest request) {
+    /**
+     * Creates a new request.
+     *
+     * @param request booking data to create — must not be null
+     * @return raw {@link Response}
+     */
+	public Response login(APIOneRequest request) {
 		try {
 			logger.info("POST {}", ENDPOINT);
-			return given().spec(ApiOneBaseApi.requestSpec()).body(request).when().post(ENDPOINT);
+			return given().spec(BookingBaseApi.requestSpec()).body(request).when().post(ENDPOINT);
 		} catch (Exception e) {
 			logger.error("POST failed: {}", e.getMessage());
 			throw new RuntimeException("POST " + ENDPOINT + " failed", e);
@@ -40,7 +46,7 @@ public class BookingEndpoint {
 
     // ----------------------------------------------------------------
     // GET
-    // ----------------------------------------------------------------
+    // ----------------------------------------------------------------	
 
     /**
      * Retrieves all posts.

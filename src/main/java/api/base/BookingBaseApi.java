@@ -9,7 +9,6 @@ import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
-import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
@@ -30,7 +29,8 @@ public class BookingBaseApi {
         logger.info("Building base request specification — baseUri: {}", Config.BOIKING_BASE_URL);
         return new RequestSpecBuilder()
                 .setBaseUri(Config.BOIKING_BASE_URL)
-                .setContentType(ContentType.JSON)
+                .setContentType(Config.CONTENT_TYPE)
+				.setAccept(Config.ACCEPT)
                 .addFilter(new AllureRestAssured())   // auto-attaches to Allure
                 .log(LogDetail.ALL)                   // logs request to console
                 .build();

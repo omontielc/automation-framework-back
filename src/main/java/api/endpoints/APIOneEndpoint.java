@@ -36,11 +36,6 @@ public class APIOneEndpoint {
 			throw new RuntimeException("POST " + ENDPOINT + " failed", e);
 		}
 	}
-    
-
-    // ----------------------------------------------------------------
-    // GET
-    // ----------------------------------------------------------------
 
     /**
      * Retrieves all posts.
