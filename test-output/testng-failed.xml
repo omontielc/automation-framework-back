@@ -5,8 +5,14 @@
     <classes>
       <class name="test.api.ATC01_Test1">
         <methods>
+          <include name="shouldReturn404ForNonExistentPost"/>
+          <include name="shouldUpdatePost"/>
+          <include name="shouldCreatePost"/>
+          <include name="shouldGetPostById"/>
+          <include name="shouldDeletePost"/>
+          <include name="shouldMatchPostSchema"/>
+          <include name="shouldGetapiOneByUserId"/>
           <include name="setupSuite"/>
-          <include name="shouldManagePostLifecycle"/>
         </methods>
       </class> <!-- test.api.ATC01_Test1 -->
     </classes>

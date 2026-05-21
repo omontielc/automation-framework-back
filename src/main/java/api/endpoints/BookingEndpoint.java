@@ -1,6 +1,7 @@
 package api.endpoints;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,13 +9,11 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import api.base.ApiOneBaseApi;
-import api.base.BookingBaseApi;
+import api.base.BaseApi;
 import api.models.request.APIOneRequest;
 import api.models.response.APIOneResponse;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 
 /**
@@ -36,7 +35,7 @@ public class BookingEndpoint {
 	public Response login(APIOneRequest request) {
 		try {
 			logger.info("POST {}", ENDPOINT);
-			return given().spec(BookingBaseApi.requestSpec()).body(request).when().post(ENDPOINT);
+			return given().spec(BaseApi.requestSpec()).body(request).when().post(ENDPOINT);
 		} catch (Exception e) {
 			logger.error("POST failed: {}", e.getMessage());
 			throw new RuntimeException("POST " + ENDPOINT + " failed", e);
@@ -57,7 +56,7 @@ public class BookingEndpoint {
     public Response getAll() {
     	try {
             logger.info("GET {}", ENDPOINT);
-            return given().spec(ApiOneBaseApi.requestSpec()).when().get(ENDPOINT);
+            return given().spec(BaseApi.requestSpec()).when().get(ENDPOINT);
         } catch (Exception e) {
             logger.error("GET all posts failed: {}", e.getMessage());
             throw new RuntimeException("GET " + ENDPOINT + " failed", e);
@@ -78,7 +77,7 @@ public class BookingEndpoint {
         }
         try {
             logger.info("GET {}/{}", ENDPOINT, id);
-            return given().spec(ApiOneBaseApi.requestSpec()).when().get(ENDPOINT + "/" + id);
+            return given().spec(BaseApi.requestSpec()).when().get(ENDPOINT + "/" + id);
         } catch (Exception e) {
             logger.error("GET by id failed for id {}: {}", id, e.getMessage());
             throw new RuntimeException("GET " + ENDPOINT + "/" + id + " failed", e);
@@ -99,7 +98,7 @@ public class BookingEndpoint {
         }
         try {
             logger.info("GET {}?userId={}", ENDPOINT, userId);
-            return given().spec(ApiOneBaseApi.requestSpec()).queryParam("userId", userId).when().get(ENDPOINT);
+            return given().spec(BaseApi.requestSpec()).queryParam("userId", userId).when().get(ENDPOINT);
         } catch (Exception e) {
             logger.error("GET by userId failed for userId {}: {}", userId, e.getMessage());
             throw new RuntimeException("GET " + ENDPOINT + "?userId=" + userId + " failed", e);
@@ -118,7 +117,7 @@ public class BookingEndpoint {
         }
         try {
             logger.info("POST {} — body: {}", ENDPOINT, postRequest.getTitle());
-            return given().spec(ApiOneBaseApi.requestSpec()).body(postRequest).when().post(ENDPOINT);
+            return given().spec(BaseApi.requestSpec()).body(postRequest).when().post(ENDPOINT);
         } catch (Exception e) {
             logger.error("POST failed — title: {}: {}", postRequest.getTitle(), e.getMessage());
             throw new RuntimeException("POST " + ENDPOINT + " failed", e);
@@ -143,7 +142,7 @@ public class BookingEndpoint {
         }
         try {
             logger.info("PUT {}/{}", ENDPOINT, id);
-            return given().spec(ApiOneBaseApi.requestSpec()).body(postRequest).when().put(ENDPOINT + "/" + id);
+            return given().spec(BaseApi.requestSpec()).body(postRequest).when().put(ENDPOINT + "/" + id);
         } catch (Exception e) {
             logger.error("PUT failed for id {}: {}", id, e.getMessage());
             throw new RuntimeException("PUT " + ENDPOINT + "/" + id + " failed", e);
@@ -164,7 +163,7 @@ public class BookingEndpoint {
         }
         try {
             logger.info("DELETE {}/{}", ENDPOINT, id);
-            return given().spec(ApiOneBaseApi.requestSpec()).when().delete(ENDPOINT + "/" + id);
+            return given().spec(BaseApi.requestSpec()).when().delete(ENDPOINT + "/" + id);
         } catch (Exception e) {
             logger.error("DELETE failed for id {}: {}", id, e.getMessage());
             throw new RuntimeException("DELETE " + ENDPOINT + "/" + id + " failed", e);

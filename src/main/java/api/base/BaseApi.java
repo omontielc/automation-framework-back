@@ -3,12 +3,12 @@ package api.base;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import config.Config;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
+import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
@@ -17,22 +17,21 @@ import io.restassured.specification.ResponseSpecification;
  * @author Osiris Montiel Campos
  * @version 2025-10-08
  */
-public class BookingBaseApi {
+public class BaseApi {
 
-    private static final Logger logger = LogManager.getLogger(BookingBaseApi.class);
+    private static final Logger logger = LogManager.getLogger(BaseApi.class);
 
     /**
      * Builds and returns the base.
      * @return configured ready to use
      */
     public static RequestSpecification requestSpec() {
-        logger.info("Building base request specification — baseUri: {}", Config.BOIKING_BASE_URL);
+        logger.info("Building base request specification");
         return new RequestSpecBuilder()
-                .setBaseUri(Config.BOIKING_BASE_URL)
-                .setContentType(Config.CONTENT_TYPE)
-				.setAccept(Config.ACCEPT)
-                .addFilter(new AllureRestAssured())   // auto-attaches to Allure
-                .log(LogDetail.ALL)                   // logs request to console
+                .setBaseUri(RestAssured.baseURI)  // toma la URL que se configuró en @BeforeSuite
+                .setContentType(ContentType.JSON)
+                .addFilter(new AllureRestAssured())
+                .log(LogDetail.ALL)
                 .build();
     }
 
@@ -50,7 +49,6 @@ public class BookingBaseApi {
      * Configures RestAssured globally at suite startup.
      */
     public static void setup() {
-        RestAssured.baseURI = Config.BOIKING_BASE_URL;
         RestAssured.requestSpecification  = requestSpec();
         RestAssured.responseSpecification = responseSpec();
         logger.info("RestAssured global configuration applied");

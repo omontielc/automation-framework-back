@@ -12,7 +12,7 @@ import util.PropertiesHandle;
  */
 public class Config {
 
-    private static final Properties properties = new PropertiesHandle("API").getProperty();
+    
     /** 	
      * Absolute path to the root directory of the Maven project. 
      */
@@ -20,7 +20,7 @@ public class Config {
     /** 
      * Used when api.properties is not found
      */
-    private static final String DEFAULT_URL  = "https://jsonplaceholder.typicode.com";
+    private static final String APIONE_URL_BASE_DEFAULT = "https://jsonplaceholder.typicode.com";		
     private static final String DEFAULT_TIMEOUT = "1000";
     private static final String DEFAULT_CONTENT_TYPE = "application/json";
     private static final String DEFAULT_ACCEPT = "application/json";
@@ -32,16 +32,16 @@ public class Config {
             + File.separator + "test"
             + File.separator + "resources"
             + File.separator;
-    /** 
-     * Base URL of the API under test. 
-     */
-    public static final String BASE_URL = properties.getProperty("API.baseUrl",DEFAULT_URL);
+    private static final Properties properties = new PropertiesHandle("API").getProperty();
     
     /** 
-     * Base URL of the API under test. 
+     * Base URL for the APIONE. 
      */
-    public static final String BOIKING_BASE_URL = properties.getProperty("API.bokking.baseUrl",DEFAULT_URL);
-
+    public static final String APIONE_URL_BASE = properties.getProperty("API.apiOne.baseUrl",APIONE_URL_BASE_DEFAULT);
+    /** 
+     * Base URL for the BOIKING. 
+     */
+    public static final String BOOKING_URL_BASE = properties.getProperty("API.booking.baseUrl",APIONE_URL_BASE_DEFAULT);
     /** 
      * Request timeout in milliseconds. 
      */

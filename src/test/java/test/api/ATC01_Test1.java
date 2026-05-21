@@ -6,11 +6,13 @@ import static org.testng.Assert.assertNotNull;
 
 import java.util.List;
 
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import api.endpoints.APIOneEndpoint;
 import api.models.request.APIOneRequest;
 import api.models.response.APIOneResponse;
+import config.Config;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -29,6 +31,12 @@ import util.TestBase;
 public class ATC01_Test1 extends TestBase {
 
     private final APIOneEndpoint apiOne = new APIOneEndpoint();
+    
+    @BeforeSuite
+    public void setupSuite() {
+        super.setupSuite(Config.APIONE_URL_BASE);
+        logger.info("ATC01 suite initialized");
+    }
     
     @Test
     @Story("Retrieve all apiOne")

@@ -4,7 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.BeforeSuite;
 
-import api.base.ApiOneBaseApi;
+import api.base.BaseApi;
+import io.restassured.RestAssured;
 
 /**
  * Base class for all API test classes.
@@ -33,11 +34,12 @@ public class TestBase {
     /**
      * Initializes RestAssured global settings once before any test in the suite runs.S
      */
-    @BeforeSuite
-    public void setupSuite() {
-        logger.info("Initializing API test suite ");
-        testData  = new TestData("Test", ATC_Name);
-        ApiOneBaseApi.setup();
+    @BeforeSuite	
+    public void setupSuite(String urlBase) {
+        logger.info("Initializing API test suite");
+        testData = new TestData("Test", ATC_Name);
+        RestAssured.baseURI = urlBase;
+        BaseApi.setup();
         logger.info("API test suite initialized successfully");
     }
 }
