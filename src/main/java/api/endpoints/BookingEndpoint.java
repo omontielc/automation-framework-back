@@ -5,15 +5,17 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import api.base.BaseApi;
-import api.models.request.APIOneRequest;
+import api.models.request.LoginRequest;
 import api.models.response.APIOneResponse;
-import io.qameta.allure.Step;
+import api.models.response.LoginResponse;
 import io.restassured.response.Response;
+import util.PropertiesHandle;
 
 
 /**
@@ -24,151 +26,30 @@ import io.restassured.response.Response;
 public class BookingEndpoint {
 
     private static final Logger logger = LogManager.getLogger(BookingEndpoint.class);
-    private static final String ENDPOINT = "/posts";
+    
+    private static final Properties prop = new PropertiesHandle("API").getProperty();
+    private static final String LOGIN_ENDPOINT = prop.getProperty("API.login.endPoint");
     
     /**
      * Creates a new request.
      *
-     * @param request booking data to create — must not be null
-     * @return raw {@link Response}
+     * @param username name of the user
+	 * @param password password of the user 
+     * @return Response object
      */
-	public Response login(APIOneRequest request) {
+	public Response login(String username, String password) {
 		try {
-			logger.info("POST {}", ENDPOINT);
-			return given().spec(BaseApi.requestSpec()).body(request).when().post(ENDPOINT);
+			logger.info("POST {}", LOGIN_ENDPOINT);
+			LoginRequest request = new LoginRequest(username, password);
+			return given().spec(BaseApi.requestSpec()).body(request).when().post(LOGIN_ENDPOINT);
 		} catch (Exception e) {
 			logger.error("POST failed: {}", e.getMessage());
-			throw new RuntimeException("POST " + ENDPOINT + " failed", e);
+			throw new RuntimeException("POST " + LOGIN_ENDPOINT + " failed", e);
 		}
 	}
     
-
-    // ----------------------------------------------------------------
-    // GET
-    // ----------------------------------------------------------------	
-
-    /**
-     * Retrieves all posts.
-     * 
-     * @return Response object
-     */
-    @Step("GET all posts")
-    public Response getAll() {
-    	try {
-            logger.info("GET {}", ENDPOINT);
-            return given().spec(BaseApi.requestSpec()).when().get(ENDPOINT);
-        } catch (Exception e) {
-            logger.error("GET all posts failed: {}", e.getMessage());
-            throw new RuntimeException("GET " + ENDPOINT + " failed", e);
-        }
-    }
-
-    /**
-     * Retrieves a single post by its ID.
-     * 
-     * @param id post identifier
-     * @return Response object
-     */
-    @Step("GET post by id: {id}")
-    public Response getById(int id) {
-    	if (id <= 0) {
-            throw new IllegalArgumentException(
-                    "ID must be greater than 0 — received: " + id);
-        }
-        try {
-            logger.info("GET {}/{}", ENDPOINT, id);
-            return given().spec(BaseApi.requestSpec()).when().get(ENDPOINT + "/" + id);
-        } catch (Exception e) {
-            logger.error("GET by id failed for id {}: {}", id, e.getMessage());
-            throw new RuntimeException("GET " + ENDPOINT + "/" + id + " failed", e);
-        }
-    }
-
-    /**
-     * Retrieves all posts belonging to a specific user.
-     * 
-     * @param userId user identifier to filter by
-     * @return Response object
-     */
-    @Step("GET posts by userId: {userId}")
-    public Response getByUserId(int userId) {
-    	if (userId <= 0) {
-            throw new IllegalArgumentException(
-                    "userId must be greater than 0 — received: " + userId);
-        }
-        try {
-            logger.info("GET {}?userId={}", ENDPOINT, userId);
-            return given().spec(BaseApi.requestSpec()).queryParam("userId", userId).when().get(ENDPOINT);
-        } catch (Exception e) {
-            logger.error("GET by userId failed for userId {}: {}", userId, e.getMessage());
-            throw new RuntimeException("GET " + ENDPOINT + "?userId=" + userId + " failed", e);
-        }
-    }
-
-    /**
-     * Creates a new post.
-     * 
-     * @param postRequest POJO that Jackson serializes to JSON automatically
-     */
-    @Step("POST create post — title: {postRequest.title}")
-    public Response create(APIOneRequest postRequest) {
-    	if (postRequest == null) {
-            throw new IllegalArgumentException("Request body must not be null");
-        }
-        try {
-            logger.info("POST {} — body: {}", ENDPOINT, postRequest.getTitle());
-            return given().spec(BaseApi.requestSpec()).body(postRequest).when().post(ENDPOINT);
-        } catch (Exception e) {
-            logger.error("POST failed — title: {}: {}", postRequest.getTitle(), e.getMessage());
-            throw new RuntimeException("POST " + ENDPOINT + " failed", e);
-        }
-    }
-
-    /**
-     * Fully updates an existing post (replaces all fields).
-     * 
-     * @param id          ID of the post to update
-     * @param postRequest updated post data
-     * @return Response object
-     */
-    @Step("PUT update post id: {id}")
-    public Response update(int id, APIOneRequest postRequest) {
-    	if (id <= 0) {
-            throw new IllegalArgumentException(
-                    "ID must be greater than 0 — received: " + id);
-        }
-        if (postRequest == null) {
-            throw new IllegalArgumentException("Request body must not be null");
-        }
-        try {
-            logger.info("PUT {}/{}", ENDPOINT, id);
-            return given().spec(BaseApi.requestSpec()).body(postRequest).when().put(ENDPOINT + "/" + id);
-        } catch (Exception e) {
-            logger.error("PUT failed for id {}: {}", id, e.getMessage());
-            throw new RuntimeException("PUT " + ENDPOINT + "/" + id + " failed", e);
-        }
-    }
-
-    /**
-     * Deletes a post by its ID.
-     * 
-     * @param id ID of the post to delete
-     * @return Response object
-     */
-    @Step("DELETE post id: {id}")
-    public Response delete(int id) {
-    	if (id <= 0) {
-            throw new IllegalArgumentException(
-                    "ID must be greater than 0 — received: " + id);
-        }
-        try {
-            logger.info("DELETE {}/{}", ENDPOINT, id);
-            return given().spec(BaseApi.requestSpec()).when().delete(ENDPOINT + "/" + id);
-        } catch (Exception e) {
-            logger.error("DELETE failed for id {}: {}", id, e.getMessage());
-            throw new RuntimeException("DELETE " + ENDPOINT + "/" + id + " failed", e);
-        }
-    }
+	//General Accions
+	
     /**
      * Deserializes the response body into a single object.
      * 
@@ -176,11 +57,11 @@ public class BookingEndpoint {
      * @return deserialized 
      * @throws RuntimeException if the response cannot be mapped to the POJO
      */
-    public APIOneResponse deserialize(Response response) {
+    public LoginResponse deserializeLogin(Response response) {
         try {
-            return response.as(APIOneResponse.class);
+            return response.as(LoginResponse.class);
         } catch (Exception e) {
-            logger.error("Could not deserialize response to APIOneResponse: {}", e.getMessage());
+            logger.error("Could not deserialize response to LoginResponse: {}", e.getMessage());
             throw new RuntimeException(
                     "Deserialization failed — verify the response is a single object, not an array", e);
         }

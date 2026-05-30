@@ -4,8 +4,8 @@
 
     <test name="API Tests">
         <classes>
-            <class name="test.api.ATC01_Test1" />
-           <!--  <class name="test.api.ATC02_Booking" />-->
+           <!--<class name="test.api.ATC01_Test1" />-->
+           <class name="test.api.ATC02_Booking" />
         </classes>
     </test>
 

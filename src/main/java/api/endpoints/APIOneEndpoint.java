@@ -4,6 +4,7 @@ import static io.restassured.RestAssured.given;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +14,8 @@ import api.models.request.APIOneRequest;
 import api.models.response.APIOneResponse;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
+import util.PropertiesHandle;
+
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 
@@ -24,7 +27,8 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 public class APIOneEndpoint {
 
     private static final Logger logger = LogManager.getLogger(APIOneEndpoint.class);
-    private static final String ENDPOINT = "/posts";
+    private static final Properties prop = new PropertiesHandle("API").getProperty();
+    private static final String ENDPOINT = prop.getProperty("API.apiOne.endPoint");
     
     //metodo para crear un post
 	public Response createe(APIOneRequest request) {

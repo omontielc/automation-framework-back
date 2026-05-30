@@ -3,18 +3,12 @@
 <suite name="Failed suite [API_Test_Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="API Tests(failed)">
     <classes>
-      <class name="test.api.ATC01_Test1">
+      <class name="test.api.ATC02_Booking">
         <methods>
-          <include name="shouldReturn404ForNonExistentPost"/>
-          <include name="shouldUpdatePost"/>
-          <include name="shouldCreatePost"/>
-          <include name="shouldGetPostById"/>
-          <include name="shouldDeletePost"/>
-          <include name="shouldMatchPostSchema"/>
-          <include name="shouldGetapiOneByUserId"/>
+          <include name="createBooking"/>
           <include name="setupSuite"/>
         </methods>
-      </class> <!-- test.api.ATC01_Test1 -->
+      </class> <!-- test.api.ATC02_Booking -->
     </classes>
   </test> <!-- API Tests(failed) -->
 </suite> <!-- Failed suite [API_Test_Suite] -->
