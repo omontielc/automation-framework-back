@@ -1,15 +1,35 @@
-2026-05-29 20:03:54 [INFO ] util.PropertiesHandle - Repository file loaded successfully
-2026-05-29 20:03:54 [INFO ] util.PropertiesHandle - Repository file loaded successfully
-2026-05-29 20:03:54 [INFO ] org.testng.internal.Utils - [TestNG] Running:
+2026-06-02 22:20:45 [INFO ] util.PropertiesHandle - Repository file loaded successfully
+2026-06-02 22:20:45 [INFO ] util.PropertiesHandle - Repository file loaded successfully
+2026-06-02 22:20:45 [INFO ] org.testng.internal.Utils - [TestNG] Running:
   C:\Users\Osiris Montiel\Documents\eclipse-workspace\automation-framework-back\testng.xml
 
-2026-05-29 20:03:54 [INFO ] test.api.ATC02_Booking - Initializing API test suite
-2026-05-29 20:03:54 [INFO ] util.TestData - Starting the creation of the TestData file
-2026-05-29 20:03:56 [INFO ] util.TestData - TestData file created successfully
-2026-05-29 20:03:56 [INFO ] api.base.BaseApi - Building base request specification
-2026-05-29 20:03:57 [INFO ] api.base.BaseApi - RestAssured global configuration applied
-2026-05-29 20:03:57 [INFO ] test.api.ATC02_Booking - API test suite initialized successfully
-2026-05-29 20:03:57 [INFO ] test.api.ATC02_Booking - ATC02 suite initialized
-2026-05-29 20:03:57 [INFO ] api.endpoints.BookingEndpoint - POST /auth
-2026-05-29 20:03:57 [INFO ] api.base.BaseApi - Building base request specification
-2026-05-29 20:04:00 [INFO ] test.api.ATC02_Booking - Retrieved loginResponse: LoginResponse [token=e760e0d3c5d3f75]
+2026-06-02 22:20:45 [INFO ] test.api.ATC02_Booking - Initializing API test suite
+2026-06-02 22:20:45 [INFO ] util.TestData - Starting the creation of the TestData file
+2026-06-02 22:20:47 [INFO ] util.TestData - TestData file created successfully
+2026-06-02 22:20:48 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-02 22:20:49 [INFO ] api.base.BaseApi - RestAssured global configuration applied
+2026-06-02 22:20:49 [INFO ] test.api.ATC02_Booking - API test suite initialized successfully
+2026-06-02 22:20:49 [INFO ] test.api.ATC02_Booking - ATC02 suite initialized
+2026-06-02 22:20:49 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
+2026-06-02 22:20:49 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-02 22:20:53 [INFO ] test.api.ATC02_Booking - Retrieved response: io.restassured.internal.RestAssuredResponseImpl@38de4f1d
+2026-06-02 22:20:53 [INFO ] api.endpoints.BookingEndpoint - EndPoint /auth
+2026-06-02 22:20:53 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-02 22:20:53 [INFO ] test.api.ATC02_Booking - Retrieved token: f497a3af459448b
+2026-06-02 22:20:53 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
+2026-06-02 22:20:53 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-02 22:20:55 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
+2026-06-02 22:20:55 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-02 22:20:55 [INFO ] test.api.ATC02_Booking - Retrieved response: io.restassured.internal.RestAssuredResponseImpl@9d09c6f
+2026-06-02 22:20:55 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
+2026-06-02 22:20:55 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-02 22:20:56 [INFO ] test.api.ATC02_Booking - Retrieved response: io.restassured.internal.RestAssuredResponseImpl@7d3f7e4b
+2026-06-02 22:20:56 [INFO ] api.endpoints.BookingEndpoint - EndPoint /auth
+2026-06-02 22:20:56 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-02 22:20:56 [INFO ] test.api.ATC02_Booking - Retrieved token: a553c7b0e38bf3a
+2026-06-02 22:20:56 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
+2026-06-02 22:20:56 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-02 22:20:56 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
+2026-06-02 22:20:56 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-02 22:20:57 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
+2026-06-02 22:20:57 [INFO ] api.base.BaseApi - Building base request specification

@@ -5,8 +5,8 @@
     <classes>
       <class name="test.api.ATC02_Booking">
         <methods>
-          <include name="createBooking"/>
           <include name="setupSuite"/>
+          <include name="updateBooking"/>
         </methods>
       </class> <!-- test.api.ATC02_Booking -->
     </classes>

@@ -23,10 +23,6 @@ public class APIOneRequest {
         this.userId = userId;
     }
     
-    // ----------------------------------------------------------------
-    // Getters & Setters 
-    // ----------------------------------------------------------------
-    
     public String getTitle(){ 
     	return title; 
     }

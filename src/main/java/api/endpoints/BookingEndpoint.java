@@ -3,16 +3,15 @@ package api.endpoints;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import api.base.BaseApi;
+import api.models.request.BookingRequest;
 import api.models.request.LoginRequest;
-import api.models.response.APIOneResponse;
+import api.models.response.BookingResponse;
 import api.models.response.LoginResponse;
 import io.restassured.response.Response;
 import util.PropertiesHandle;
@@ -29,9 +28,9 @@ public class BookingEndpoint {
     
     private static final Properties prop = new PropertiesHandle("API").getProperty();
     private static final String LOGIN_ENDPOINT = prop.getProperty("API.login.endPoint");
-    
+    private static final String BOOKING_ENDPOINT = prop.getProperty("API.booking.endPoint");
     /**
-     * Creates a new request.
+     * Creates a login token.
      *
      * @param username name of the user
 	 * @param password password of the user 
@@ -39,12 +38,123 @@ public class BookingEndpoint {
      */
 	public Response login(String username, String password) {
 		try {
-			logger.info("POST {}", LOGIN_ENDPOINT);
+			logger.info("EndPoint {}", LOGIN_ENDPOINT);
 			LoginRequest request = new LoginRequest(username, password);
 			return given().spec(BaseApi.requestSpec()).body(request).when().post(LOGIN_ENDPOINT);
 		} catch (Exception e) {
-			logger.error("POST failed: {}", e.getMessage());
-			throw new RuntimeException("POST " + LOGIN_ENDPOINT + " failed", e);
+			logger.error("EndPoint failed: {}", e.getMessage());
+			throw new RuntimeException("EndPoint " + LOGIN_ENDPOINT + " failed", e);
+		}
+	}
+	
+	/**
+	 * Creates a new booking.
+	 *
+	 * @param firstname name of the user
+	 * @param lastname last name of the user
+	 * @param totalprice total price of the booking
+	 * @param depositpaid whether the deposit has been paid
+	 * @param checkin check-in date
+	 * @param checkout check-out date
+	 * @param additionalneeds additional needs of the booking
+	 * @return Response object
+	 */
+	public Response createBooking(String firstname, String lastname, int totalprice, boolean depositpaid, String checkin, String checkout, String additionalneeds) {
+		try {
+			logger.info("EndPoint {}", BOOKING_ENDPOINT);
+			BookingRequest request = new BookingRequest(firstname, lastname, totalprice, depositpaid, checkin, checkout, additionalneeds);
+			return given().spec(BaseApi.requestSpec()).body(request).when().post(BOOKING_ENDPOINT);
+		} catch (Exception e) {
+			logger.error("EndPoint failed: {}", e.getMessage());
+			throw new RuntimeException("EndPoint " + BOOKING_ENDPOINT + " failed", e);
+		}
+	}
+	/**
+	 * Get a booking by its Name.
+	 *
+	 * @param firstname name of the user
+	 * @return Response object
+	 */
+	public Response getBookingByName(String firstname) {
+		try {
+			logger.info("EndPoint {}", BOOKING_ENDPOINT);
+			return given()
+			        .spec(BaseApi.requestSpec())
+			        .queryParam("firstname", firstname)  // ← así se agregan query params
+			        .when()
+			        .get(BOOKING_ENDPOINT);
+		} catch (Exception e) {
+			logger.error("EndPoint failed: {}", e.getMessage());
+			throw new RuntimeException("EndPoint " + BOOKING_ENDPOINT + " failed", e);
+		}
+	}
+	/**
+	 * Update a booking.
+	 *
+	 * @param id id of the booking
+	 * @param token session token
+	 * @param firstname name of the user
+	 * @param lastname last name of the user
+	 * @param totalprice total price of the booking
+	 * @param depositpaid whether the deposit has been paid
+	 * @param checkin check-in date
+	 * @param checkout check-out date
+	 * @param additionalneeds additional needs of the booking
+	 * @return Response object
+	 */
+	public Response updateBooking(Integer id, String token,String firstname, String lastname, int totalprice, boolean depositpaid, String checkin, String checkout, String additionalneeds) {
+		try {
+			logger.info("EndPoint {}", BOOKING_ENDPOINT);
+			BookingRequest request = new BookingRequest(firstname, lastname, totalprice, depositpaid, checkin, checkout, additionalneeds);
+			return given()
+					.spec(BaseApi.requestSpec())
+					.header("Cookie", "token=" + token)
+					.body(request)
+					.when()
+					.put(BOOKING_ENDPOINT+ "/"+ id);
+		} catch (Exception e) {
+			logger.error("EndPoint failed: {}", e.getMessage());
+			throw new RuntimeException("EndPoint " + BOOKING_ENDPOINT + " failed", e);
+		}
+	}
+	
+	/**
+	 * Get a booking by its Name.
+	 *
+	 * @param firstname name of the user
+	 * @return Response object
+	 */
+	public Response getBookingById(int id) {
+		try {
+			logger.info("EndPoint {}", BOOKING_ENDPOINT);
+			return given()
+			        .spec(BaseApi.requestSpec())  // ← así se agregan query params
+			        .when()
+			        .get(BOOKING_ENDPOINT+"/"+id);
+		} catch (Exception e) {
+			logger.error("EndPoint failed: {}", e.getMessage());
+			throw new RuntimeException("EndPoint " + BOOKING_ENDPOINT + " failed", e);
+		}
+	}
+	
+	/**
+	 * Get a booking by its Name.
+	 * 
+	 * @param id booking
+	 * @param token session token
+	 * @return Response object
+	 */
+	public Response deleteBookingById(Integer id, String token) {
+		try {
+			logger.info("EndPoint {}", BOOKING_ENDPOINT);
+			return given()
+			        .spec(BaseApi.requestSpec())
+					.header("Cookie", "token=" + token)
+			        .when()
+			        .delete(BOOKING_ENDPOINT+"/"+id);
+		} catch (Exception e) {
+			logger.error("EndPoint failed: {}", e.getMessage());
+			throw new RuntimeException("EndPoint " + BOOKING_ENDPOINT + " failed", e);
 		}
 	}
     
@@ -66,41 +176,23 @@ public class BookingEndpoint {
                     "Deserialization failed — verify the response is a single object, not an array", e);
         }
     }
- 
-    /**
-     * Deserializes the response body into an objects.
-     * 
-     * @param response raw response from a list endpoint
-     * @return deserialized list
-     * @throws RuntimeException if the response cannot be mapped to the POJO list
-     */
-    public List<APIOneResponse> deserializeList(Response response) {
-        try {
-            return Arrays.asList(response.as(APIOneResponse[].class));
-        } catch (Exception e) {
-            logger.error("Could not deserialize response to List<APIOneResponse>: {}", e.getMessage());
-            throw new RuntimeException(
-                    "Deserialization failed — verify the response is an array, not a single object", e);
-        }
-    }
-    /**
-     * Safely parses a String value from test data into an int.
-     * 
-     * @param value     String value to parse (typically from TestData)
-     * @param fieldName name of the test data field — used in the error message
-     * @return parsed int value
-     * @throws RuntimeException if the value cannot be parsed as an integer
-     */
-    public int parseId(String value, String fieldName) {
-        try {
-            return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            logger.error("Invalid test data — '{}' is not a valid integer: '{}'", fieldName, value);
-            throw new RuntimeException(
-                    "Test data error: field '" + fieldName + "' must be a number, got: '" + value + "'", e);
-        }
-    }
     
+    /**
+     * Deserializes the response body into a single object.
+     * 
+     * @param response raw response from a single-object endpoint
+     * @return deserialized 
+     * @throws RuntimeException if the response cannot be mapped to the POJO
+     */
+    public 	BookingResponse deserializeBooking(Response response) {
+        try {
+            return response.as(BookingResponse.class);
+        } catch (Exception e) {
+            logger.error("Could not deserialize response to BookingResponse: {}", e.getMessage());
+            throw new RuntimeException(
+                    "Deserialization failed — verify the response is a single object, not an array", e);
+        }
+    }
     /**
      * Validates that the response body matches the expected JSON Schema.
      *	

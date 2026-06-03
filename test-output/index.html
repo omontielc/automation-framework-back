@@ -92,7 +92,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method,   1 passed</span>
+                    <span class="method-stats">3 methods,   3 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -104,6 +104,16 @@
                       <span>
                         <img src="passed.png" width="3%"/>
                         <a href="#" panel-name="suite-API_Test_Suite" title="test.api.ATC02_Booking" class="method navigator-link" hash-for-method="createBooking">createBooking</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-API_Test_Suite" title="test.api.ATC02_Booking" class="method navigator-link" hash-for-method="deleteBooking">deleteBooking</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-API_Test_Suite" title="test.api.ATC02_Booking" class="method navigator-link" hash-for-method="updateBooking">updateBooking</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-API_Test_Suite -->
@@ -129,6 +139,20 @@
                   <a name="createBooking">
                   </a> <!-- createBooking -->
                   <span class="method-name">createBooking</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="deleteBooking">
+                  </a> <!-- deleteBooking -->
+                  <span class="method-name">deleteBooking</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="updateBooking">
+                  </a> <!-- updateBooking -->
+                  <span class="method-name">updateBooking</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -185,16 +209,24 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(1);
+data.addRows(3);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'createBooking')
 data.setCell(0, 2, 'test.api.ATC02_Booking')
-data.setCell(0, 3, 2999);
+data.setCell(0, 3, 3915);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'updateBooking')
+data.setCell(1, 2, 'test.api.ATC02_Booking')
+data.setCell(1, 3, 2802);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'deleteBooking')
+data.setCell(2, 2, 'test.api.ATC02_Booking')
+data.setCell(2, 3, 1782);
 window.suiteTableData['API_Test_Suite']= { tableData: data, tableDiv: 'times-div-API_Test_Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 2 seconds</span>
+              <span class="suite-total-time">Total running time: 8 seconds</span>
               <div id="times-div-API_Test_Suite">
               </div> <!-- times-div-API_Test_Suite -->
             </div> <!-- times-div -->
@@ -227,7 +259,15 @@ return data;
               </div> <!-- configuration-suite before -->
               <div class="test-method">
                 <span class="method-name">createBooking</span>
-                <span class="method-start">2390 ms</span>
+                <span class="method-start">3354 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">updateBooking</span>
+                <span class="method-start">7366 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">deleteBooking</span>
+                <span class="method-start">10179 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
