@@ -10,30 +10,30 @@ import api.models.request.BookingDates;
  * @version 2025-07-06
  */
 public class BookingResponse {
-	
+
 	@JsonProperty("bookingid")
 	private int    bookingId;
-	
+
 	@JsonProperty("firstname")
     private String firstName;
-	
-	@JsonProperty("lastname") 
+
+	@JsonProperty("lastname")
 	private String lastName;
-	
-	@JsonProperty("totalprice") 
+
+	@JsonProperty("totalprice")
 	private int    totalPrice;
-	
-	@JsonProperty("depositpaid") 
+
+	@JsonProperty("depositpaid")
 	private boolean depositPaid;
-	
+
 	@JsonProperty("bookingdates")
 	private BookingDates bookingDates;
-	
+
 	@JsonProperty("additionalneeds")
 	private String additionalNeeds;
-	
+
 	public BookingResponse() {
-		
+
 	}
 	public int getBookingId() {
 		return bookingId;

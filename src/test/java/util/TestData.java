@@ -2,10 +2,11 @@ package util;
 
 import java.io.FileInputStream;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import config.Config;
-import org.apache.logging.log4j.LogManager;
 /**
  * This class contains the methods for obtaining test data from an Excel file.
  * @author Osiris Montiel Campos
@@ -91,7 +92,7 @@ public class TestData {
 			logger.info("Starting the creation of the TestData file");
 			// Create input and output file
 			FileInputStream ExcelFile = new FileInputStream(Config.TESTDATA_PATH + Config.TESTDATA_FILENAME);
-			
+
 			// Create workbook
 			ExcelWBook = new XSSFWorkbook(ExcelFile);
 			// Create worksheet
@@ -112,7 +113,7 @@ public class TestData {
 			row++;
 		}
 		// Return maximum value of rows found
-		return row--; 
+		return row--;
 	}
 	/**
 	 * Method responsible for obtaining the number of columns in the file
@@ -126,7 +127,7 @@ public class TestData {
 			col++;
 		}
 		// Return maximum value of columns found
-		return col; 
+		return col;
 	}
 	/**
 	 * Method responsible for obtaining the number of executions for the test case
@@ -139,7 +140,7 @@ public class TestData {
 		// Loop to iterate through all rows until the value is null
 		while(ExcelWSheet.getRow(row) != null) {
 			// Check if the record belongs to the active test case and if it should be executed
-			if(ExcelWSheet.getRow(row).getCell(col).toString().equals(ATC_Name) && 
+			if(ExcelWSheet.getRow(row).getCell(col).toString().equals(ATC_Name) &&
 					ExcelWSheet.getRow(row).getCell(1).toString().equalsIgnoreCase("SI")) {
 				// Increase the test case count
 				numAtc++;
@@ -147,7 +148,7 @@ public class TestData {
 			row++;
 		}
 		// Return the number of test cases found
-		return numAtc; 
+		return numAtc;
 	}
 	/**
 	 * Method responsible for loading test data headers into the testData matrix
@@ -170,7 +171,7 @@ public class TestData {
 		// Loop to iterate through all header rows
 		for (row = 0; row < MAX_ROW; row++) {
 			// If the cell value matches the test case name and if it should be executed
-			if(ExcelWSheet.getRow(row).getCell(col).toString().equals(ATC_Name) && 
+			if(ExcelWSheet.getRow(row).getCell(col).toString().equals(ATC_Name) &&
 					ExcelWSheet.getRow(row).getCell(1).toString().equalsIgnoreCase("SI")) {
 					// Loop to iterate through all header columns
 					for (col = 0; col < MAX_COL; col++) {
@@ -190,7 +191,7 @@ public class TestData {
 	/**
 	 * Method responsible for loading headers and test data into the testData matrix
 	 * @param ATC_Name Test case name
-	 */ 
+	 */
 	private void cargaTestData(String ATC_Name) {
 		// Call header loading method
 		loadHeaders();
@@ -202,7 +203,7 @@ public class TestData {
 	 * @param dataName Test case name
 	 * @param numATC Test case number being worked on
 	 * @return Returns the specific test data or "NotDataFound" if the element is not found
-	 */ 
+	 */
 	public String getData(String dataName,int numATC) {
 		String data="";
 		// Loop to iterate through all header columns
@@ -212,7 +213,7 @@ public class TestData {
 					// Obtain the data
 					data=testData[numATC][col];
 				}
-			}		
+			}
 			// If data is not null, return the data
 			if(data!=null) {
 				return data;
@@ -241,7 +242,7 @@ public class TestData {
 			// Create a row
 			XSSFRow Row = ExcelWSheet.getRow(row);
 			// Add a column to the cell
-			XSSFCell cell = Row.getCell(col); 
+			XSSFCell cell = Row.getCell(col);
 			// Validate if the cell already exists
 			if (cell == null) {
 				// Create the cell

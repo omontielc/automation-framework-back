@@ -25,7 +25,7 @@ import util.PropertiesHandle;
 public class BookingEndpoint {
 
     private static final Logger logger = LogManager.getLogger(BookingEndpoint.class);
-    
+
     private static final Properties prop = new PropertiesHandle("API").getProperty();
     private static final String LOGIN_ENDPOINT = prop.getProperty("API.login.endPoint");
     private static final String BOOKING_ENDPOINT = prop.getProperty("API.booking.endPoint");
@@ -33,7 +33,7 @@ public class BookingEndpoint {
      * Creates a login token.
      *
      * @param username name of the user
-	 * @param password password of the user 
+	 * @param password password of the user
      * @return Response object
      */
 	public Response login(String username, String password) {
@@ -46,7 +46,7 @@ public class BookingEndpoint {
 			throw new RuntimeException("EndPoint " + LOGIN_ENDPOINT + " failed", e);
 		}
 	}
-	
+
 	/**
 	 * Creates a new booking.
 	 *
@@ -117,7 +117,7 @@ public class BookingEndpoint {
 			throw new RuntimeException("EndPoint " + BOOKING_ENDPOINT + " failed", e);
 		}
 	}
-	
+
 	/**
 	 * Get a booking by its Name.
 	 *
@@ -136,10 +136,10 @@ public class BookingEndpoint {
 			throw new RuntimeException("EndPoint " + BOOKING_ENDPOINT + " failed", e);
 		}
 	}
-	
+
 	/**
 	 * Get a booking by its Name.
-	 * 
+	 *
 	 * @param id booking
 	 * @param token session token
 	 * @return Response object
@@ -157,14 +157,14 @@ public class BookingEndpoint {
 			throw new RuntimeException("EndPoint " + BOOKING_ENDPOINT + " failed", e);
 		}
 	}
-    
+
 	//General Accions
-	
+
     /**
      * Deserializes the response body into a single object.
-     * 
+     *
      * @param response raw response from a single-object endpoint
-     * @return deserialized 
+     * @return deserialized
      * @throws RuntimeException if the response cannot be mapped to the POJO
      */
     public LoginResponse deserializeLogin(Response response) {
@@ -176,12 +176,12 @@ public class BookingEndpoint {
                     "Deserialization failed — verify the response is a single object, not an array", e);
         }
     }
-    
+
     /**
      * Deserializes the response body into a single object.
-     * 
+     *
      * @param response raw response from a single-object endpoint
-     * @return deserialized 
+     * @return deserialized
      * @throws RuntimeException if the response cannot be mapped to the POJO
      */
     public 	BookingResponse deserializeBooking(Response response) {
@@ -195,7 +195,7 @@ public class BookingEndpoint {
     }
     /**
      * Validates that the response body matches the expected JSON Schema.
-     *	
+     *
      * @param response   raw response to validate
      * @param schemaPath path to the schema file relative to src/test/resources
      * @throws RuntimeException if the schema file is not found

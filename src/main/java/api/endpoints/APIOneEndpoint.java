@@ -1,6 +1,7 @@
 package api.endpoints;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,8 +17,6 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import util.PropertiesHandle;
 
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-
 
 /**
  * Encapsulates all HTTP operations for the endpoint.
@@ -29,7 +28,7 @@ public class APIOneEndpoint {
     private static final Logger logger = LogManager.getLogger(APIOneEndpoint.class);
     private static final Properties prop = new PropertiesHandle("API").getProperty();
     private static final String ENDPOINT = prop.getProperty("API.apiOne.endPoint");
-    
+
     //metodo para crear un post
 	public Response createe(APIOneRequest request) {
 		try {
@@ -43,7 +42,7 @@ public class APIOneEndpoint {
 
     /**
      * Retrieves all posts.
-     * 
+     *
      * @return Response object
      */
     @Step("GET all posts")
@@ -59,7 +58,7 @@ public class APIOneEndpoint {
 
     /**
      * Retrieves a single post by its ID.
-     * 
+     *
      * @param id post identifier
      * @return Response object
      */
@@ -80,7 +79,7 @@ public class APIOneEndpoint {
 
     /**
      * Retrieves all posts belonging to a specific user.
-     * 
+     *
      * @param userId user identifier to filter by
      * @return Response object
      */
@@ -101,7 +100,7 @@ public class APIOneEndpoint {
 
     /**
      * Creates a new post.
-     * 
+     *
      * @param postRequest POJO that Jackson serializes to JSON automatically
      */
     @Step("POST create post — title: {postRequest.title}")
@@ -120,7 +119,7 @@ public class APIOneEndpoint {
 
     /**
      * Fully updates an existing post (replaces all fields).
-     * 
+     *
      * @param id          ID of the post to update
      * @param postRequest updated post data
      * @return Response object
@@ -145,7 +144,7 @@ public class APIOneEndpoint {
 
     /**
      * Deletes a post by its ID.
-     * 
+     *
      * @param id ID of the post to delete
      * @return Response object
      */
@@ -165,9 +164,9 @@ public class APIOneEndpoint {
     }
     /**
      * Deserializes the response body into a single object.
-     * 
+     *
      * @param response raw response from a single-object endpoint
-     * @return deserialized 
+     * @return deserialized
      * @throws RuntimeException if the response cannot be mapped to the POJO
      */
     public APIOneResponse deserialize(Response response) {
@@ -179,10 +178,10 @@ public class APIOneEndpoint {
                     "Deserialization failed — verify the response is a single object, not an array", e);
         }
     }
- 
+
     /**
      * Deserializes the response body into an objects.
-     * 
+     *
      * @param response raw response from a list endpoint
      * @return deserialized list
      * @throws RuntimeException if the response cannot be mapped to the POJO list
@@ -198,7 +197,7 @@ public class APIOneEndpoint {
     }
     /**
      * Safely parses a String value from test data into an int.
-     * 
+     *
      * @param value     String value to parse (typically from TestData)
      * @param fieldName name of the test data field — used in the error message
      * @return parsed int value
@@ -213,10 +212,10 @@ public class APIOneEndpoint {
                     "Test data error: field '" + fieldName + "' must be a number, got: '" + value + "'", e);
         }
     }
-    
+
     /**
      * Validates that the response body matches the expected JSON Schema.
-     *	
+     *
      * @param response   raw response to validate
      * @param schemaPath path to the schema file relative to src/test/resources
      * @throws RuntimeException if the schema file is not found

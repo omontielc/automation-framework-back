@@ -13,7 +13,7 @@ public class LoginResponse {
     private String token;
 
     // ----------------------------------------------------------------
-    // Getters & Setters 
+    // Getters & Setters
     // ----------------------------------------------------------------
 
 	public String getToken() {
@@ -26,5 +26,5 @@ public class LoginResponse {
 	@Override
 	public String toString() {
 		return "LoginResponse [token=" + token + "]";
-	}	
+	}
 }

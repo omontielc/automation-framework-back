@@ -31,13 +31,13 @@ import util.TestBase;
 public class ATC01_Test1 extends TestBase {
 
     private final APIOneEndpoint apiOne = new APIOneEndpoint();
-    
+
     @BeforeSuite
     public void setupSuite() {
         super.setupSuite(Config.APIONE_URL_BASE);
         logger.info("ATC01 suite initialized");
     }
-    
+
     @Test
     @Story("Retrieve all apiOne")
     @Description("GET /posts should return 200 and a non-empty list of 100")
@@ -48,9 +48,9 @@ public class ATC01_Test1 extends TestBase {
      	List<APIOneResponse> posts = apiOne.deserializeList(response);
 
         assertFalse(posts.isEmpty(), "List should not be empty");
-        
+
         logger.info("Retrieved post: {}", posts);
-        
+
    }
 
     @Test
@@ -80,7 +80,7 @@ public class ATC01_Test1 extends TestBase {
 
         assertFalse(posts.isEmpty(), "List should not be empty");
         posts.forEach(post -> assertEquals(post.getUserId(), Integer.parseInt(testData.getData("UserId", 1)), "All posts should belong to userId 1"));
-        
+
         logger.info("Retrieved post: {}", posts);
     }
 
@@ -91,10 +91,10 @@ public class ATC01_Test1 extends TestBase {
     public void shouldReturn404ForNonExistentPost() {
     	int id = apiOne.parseId(testData.getData("Id_2", 1), "Id_2");
     	Response response = apiOne.getById(id);
-        
+
         assertEquals(response.getStatusCode(), 404, "Should return 404 for non-existent resource");
         assertNotNull(response.getBody(), "Response body should not be null");
-        
+
         logger.info("Post error: {}",  response.getStatusCode());
 
     }
@@ -106,11 +106,11 @@ public class ATC01_Test1 extends TestBase {
     public void shouldCreatePost() {
     	int userId = apiOne.parseId(testData.getData("UserId", 1), "UserId");
     	APIOneRequest request = new APIOneRequest("My first automated post", "This is the post body", userId);
-        
+
         Response response = apiOne.create(request);
         APIOneResponse post = apiOne.deserialize(response);
         assertEquals(response.getStatusCode(), 201, "Should return 201 Created");
-        
+
         logger.info("Post created with id: {}",  post.getId());
     }
 
@@ -123,13 +123,13 @@ public class ATC01_Test1 extends TestBase {
         APIOneRequest updated = new APIOneRequest("Updated title", "Updated body", id);
 
         Response response = apiOne.update(id, updated);
-        
+
         APIOneResponse post = apiOne.deserialize(response);
         assertEquals(post.getId(),   id  ,  "Post ID should be 1");
         assertNotNull(post.getTitle(),     "Title should not be null");
 
         logger.info("Updated post: {}", post);
-             
+
     }
 
     @Test
@@ -139,11 +139,11 @@ public class ATC01_Test1 extends TestBase {
     public void shouldDeletePost() {
     	int id = apiOne.parseId(testData.getData("Id", 1), "Id");
     	Response response = apiOne.delete(id);
-    	
+
         assertEquals(response.getStatusCode(), 200, "Should be deleted");
         logger.info("Deleted post: {}", id);
     }
-    
+
     @Test
     @Story("Validate post response schema")
     @Description("GET /posts/1 response must match the defined JSON Schema")

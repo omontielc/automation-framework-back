@@ -3,7 +3,9 @@ package util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
+
 import org.apache.logging.log4j.LogManager;
+
 import config.Config;
 
 
@@ -41,9 +43,9 @@ public class PropertiesHandle {
 		/**
 		 * Method responsible for returning the PropertiesHandle instance
 		 * @return objProperties Object containing the loaded properties
-		 */ 
-		public Properties getProperty(){	
+		 */
+		public Properties getProperty(){
 			return objProperties;
 		}
-		
+
 	}

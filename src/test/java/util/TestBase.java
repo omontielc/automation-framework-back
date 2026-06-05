@@ -15,12 +15,12 @@ import io.restassured.RestAssured;
 public class TestBase {
 
     protected final Logger logger = LogManager.getLogger(getClass());
-    /** 
-     * Test data reader bound to the current test case name. 
+    /**
+     * Test data reader bound to the current test case name.
      */
     protected TestData testData;
-    /** 
-     * Name of the test case, used to look up rows in the test data file. 
+    /**
+     * Name of the test case, used to look up rows in the test data file.
      */
     protected String ATC_Name;
 
@@ -30,11 +30,11 @@ public class TestBase {
     public TestBase() {
     	this.ATC_Name = this.getClass().getSimpleName();
     }
-    
+
     /**
      * Initializes RestAssured global settings once before any test in the suite runs.S
      */
-    @BeforeSuite	
+    @BeforeSuite
     public void setupSuite(String urlBase) {
         logger.info("Initializing API test suite");
         testData = new TestData("Test", ATC_Name);
