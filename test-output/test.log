@@ -1,35 +1,46 @@
-2026-06-02 22:20:45 [INFO ] util.PropertiesHandle - Repository file loaded successfully
-2026-06-02 22:20:45 [INFO ] util.PropertiesHandle - Repository file loaded successfully
-2026-06-02 22:20:45 [INFO ] org.testng.internal.Utils - [TestNG] Running:
+2026-06-05 22:14:42 [INFO ] util.PropertiesHandle - Repository file loaded successfully
+2026-06-05 22:14:42 [INFO ] util.PropertiesHandle - Repository file loaded successfully
+2026-06-05 22:14:42 [INFO ] org.testng.internal.Utils - [TestNG] Running:
   C:\Users\Osiris Montiel\Documents\eclipse-workspace\automation-framework-back\testng.xml
 
-2026-06-02 22:20:45 [INFO ] test.api.ATC02_Booking - Initializing API test suite
-2026-06-02 22:20:45 [INFO ] util.TestData - Starting the creation of the TestData file
-2026-06-02 22:20:47 [INFO ] util.TestData - TestData file created successfully
-2026-06-02 22:20:48 [INFO ] api.base.BaseApi - Building base request specification
-2026-06-02 22:20:49 [INFO ] api.base.BaseApi - RestAssured global configuration applied
-2026-06-02 22:20:49 [INFO ] test.api.ATC02_Booking - API test suite initialized successfully
-2026-06-02 22:20:49 [INFO ] test.api.ATC02_Booking - ATC02 suite initialized
-2026-06-02 22:20:49 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
-2026-06-02 22:20:49 [INFO ] api.base.BaseApi - Building base request specification
-2026-06-02 22:20:53 [INFO ] test.api.ATC02_Booking - Retrieved response: io.restassured.internal.RestAssuredResponseImpl@38de4f1d
-2026-06-02 22:20:53 [INFO ] api.endpoints.BookingEndpoint - EndPoint /auth
-2026-06-02 22:20:53 [INFO ] api.base.BaseApi - Building base request specification
-2026-06-02 22:20:53 [INFO ] test.api.ATC02_Booking - Retrieved token: f497a3af459448b
-2026-06-02 22:20:53 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
-2026-06-02 22:20:53 [INFO ] api.base.BaseApi - Building base request specification
-2026-06-02 22:20:55 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
-2026-06-02 22:20:55 [INFO ] api.base.BaseApi - Building base request specification
-2026-06-02 22:20:55 [INFO ] test.api.ATC02_Booking - Retrieved response: io.restassured.internal.RestAssuredResponseImpl@9d09c6f
-2026-06-02 22:20:55 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
-2026-06-02 22:20:55 [INFO ] api.base.BaseApi - Building base request specification
-2026-06-02 22:20:56 [INFO ] test.api.ATC02_Booking - Retrieved response: io.restassured.internal.RestAssuredResponseImpl@7d3f7e4b
-2026-06-02 22:20:56 [INFO ] api.endpoints.BookingEndpoint - EndPoint /auth
-2026-06-02 22:20:56 [INFO ] api.base.BaseApi - Building base request specification
-2026-06-02 22:20:56 [INFO ] test.api.ATC02_Booking - Retrieved token: a553c7b0e38bf3a
-2026-06-02 22:20:56 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
-2026-06-02 22:20:56 [INFO ] api.base.BaseApi - Building base request specification
-2026-06-02 22:20:56 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
-2026-06-02 22:20:56 [INFO ] api.base.BaseApi - Building base request specification
-2026-06-02 22:20:57 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
-2026-06-02 22:20:57 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-05 22:14:42 [INFO ] test.api.ATC02_Booking - Initializing API test suite
+2026-06-05 22:14:42 [INFO ] util.TestData - Starting the creation of the TestData file
+2026-06-05 22:14:44 [INFO ] util.TestData - TestData file created successfully
+2026-06-05 22:14:45 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-05 22:14:45 [INFO ] api.base.BaseApi - RestAssured global configuration applied
+2026-06-05 22:14:45 [INFO ] test.api.ATC02_Booking - API test suite initialized successfully
+2026-06-05 22:14:45 [INFO ] test.api.ATC02_Booking - ATC02 suite initialized
+2026-06-05 22:14:45 [ERROR] io.qameta.allure.util.NamingUtils - Could not find parameter BOOKING_ENDPOINT
+2026-06-05 22:14:45 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
+2026-06-05 22:14:46 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-05 22:14:49 [INFO ] test.api.ATC02_Booking - createBooking completed successfully
+2026-06-05 22:14:49 [ERROR] io.qameta.allure.util.NamingUtils - Could not find parameter LOGIN_ENDPOINT
+2026-06-05 22:14:49 [INFO ] api.endpoints.BookingEndpoint - EndPoint /auth
+2026-06-05 22:14:49 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-05 22:14:49 [INFO ] test.api.ATC02_Booking - Token retrieved successfully
+2026-06-05 22:14:49 [ERROR] io.qameta.allure.util.NamingUtils - Could not find parameter BOOKING_ENDPOINT
+2026-06-05 22:14:49 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
+2026-06-05 22:14:49 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-05 22:14:51 [INFO ] test.api.ATC02_Booking - First booking ID found: 2020
+2026-06-05 22:14:51 [ERROR] io.qameta.allure.util.NamingUtils - Could not find parameter BOOKING_ENDPOINT
+2026-06-05 22:14:51 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
+2026-06-05 22:14:51 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-05 22:14:51 [ERROR] io.qameta.allure.util.NamingUtils - Could not find parameter BOOKING_ENDPOINT
+2026-06-05 22:14:51 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
+2026-06-05 22:14:51 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-05 22:14:52 [INFO ] test.api.ATC02_Booking - updateBooking completed successfully
+2026-06-05 22:14:52 [ERROR] io.qameta.allure.util.NamingUtils - Could not find parameter LOGIN_ENDPOINT
+2026-06-05 22:14:52 [INFO ] api.endpoints.BookingEndpoint - EndPoint /auth
+2026-06-05 22:14:52 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-05 22:14:52 [INFO ] test.api.ATC02_Booking - Token retrieved successfully
+2026-06-05 22:14:52 [ERROR] io.qameta.allure.util.NamingUtils - Could not find parameter BOOKING_ENDPOINT
+2026-06-05 22:14:52 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
+2026-06-05 22:14:52 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-05 22:14:53 [INFO ] test.api.ATC02_Booking - First booking ID found: 2020
+2026-06-05 22:14:53 [ERROR] io.qameta.allure.util.NamingUtils - Could not find parameter BOOKING_ENDPOINT
+2026-06-05 22:14:53 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
+2026-06-05 22:14:53 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-05 22:14:53 [ERROR] io.qameta.allure.util.NamingUtils - Could not find parameter BOOKING_ENDPOINT
+2026-06-05 22:14:53 [INFO ] api.endpoints.BookingEndpoint - EndPoint /booking
+2026-06-05 22:14:53 [INFO ] api.base.BaseApi - Building base request specification
+2026-06-05 22:14:53 [INFO ] test.api.ATC02_Booking - deleteBooking completed successfully
