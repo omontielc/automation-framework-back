@@ -1,7 +1,0 @@
-Status Code: 200
-
-[
-    {
-        "bookingid": 3948
-    }
-]
