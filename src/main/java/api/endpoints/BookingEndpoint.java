@@ -42,6 +42,7 @@ public class BookingEndpoint {
             LoginRequest request = new LoginRequest(username, password);
             Response response = given().spec(BaseApi.requestSpec()).body(request).when().post(LOGIN_ENDPOINT);
             attachResponse("Login Response", response);
+            attachHeaders(response);
             return response;
         } catch (Exception e) {
             logger.error("EndPoint failed: {}", e.getMessage());
@@ -59,6 +60,7 @@ public class BookingEndpoint {
                     depositpaid, checkin, checkout, additionalneeds);
             Response response = given().spec(BaseApi.requestSpec()).body(request).when().post(BOOKING_ENDPOINT);
             attachResponse("Create Booking Response", response);
+            attachHeaders(response);
             return response;
         } catch (Exception e) {
             logger.error("EndPoint failed: {}", e.getMessage());
@@ -76,6 +78,7 @@ public class BookingEndpoint {
                     .when()
                     .get(BOOKING_ENDPOINT);
             attachResponse("Get Booking By Name Response", response);
+            attachHeaders(response);
             return response;
         } catch (Exception e) {
             logger.error("EndPoint failed: {}", e.getMessage());
@@ -92,6 +95,7 @@ public class BookingEndpoint {
                     .when()
                     .get(BOOKING_ENDPOINT + "/" + id);
             attachResponse("Get Booking By ID Response", response);
+            attachHeaders(response);
             return response;
         } catch (Exception e) {
             logger.error("EndPoint failed: {}", e.getMessage());
@@ -114,6 +118,7 @@ public class BookingEndpoint {
                     .when()
                     .put(BOOKING_ENDPOINT + "/" + id);
             attachResponse("Update Booking Response", response);
+            attachHeaders(response);
             return response;
         } catch (Exception e) {
             logger.error("EndPoint failed: {}", e.getMessage());
@@ -131,6 +136,7 @@ public class BookingEndpoint {
                     .when()
                     .delete(BOOKING_ENDPOINT + "/" + id);
             attachResponse("Delete Booking Response", response);
+            attachHeaders(response);
             return response;
         } catch (Exception e) {
             logger.error("EndPoint failed: {}", e.getMessage());
@@ -183,15 +189,28 @@ public class BookingEndpoint {
     }
 
     // =========================================================
-    // Attachments — visibles en el reporte Allure
+    // Attachments
     // =========================================================
 
     @Attachment(value = "{label}", type = "application/json")
     private String attachResponse(String label, Response response) {
         try {
-            return response.getBody().asPrettyString();
+            int statusCode = response.getStatusCode();
+            String body = response.getBody().asPrettyString();
+
+            // Incluye el status code en el attachment para más contexto
+            return "Status Code: " + statusCode + "\n\n" + body;
         } catch (Exception e) {
             return "Could not attach response body: " + e.getMessage();
+        }
+    }
+
+    @Attachment(value = "Request Headers", type = "text/plain")
+    private String attachHeaders(Response response) {
+        try {
+            return response.getHeaders().toString();
+        } catch (Exception e) {
+            return "Could not attach headers: " + e.getMessage();
         }
     }
 }

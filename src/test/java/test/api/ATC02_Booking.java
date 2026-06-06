@@ -23,6 +23,7 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
+import util.EnvironmentWriter;
 import util.TestBase;
 
 /**
@@ -39,6 +40,7 @@ public class ATC02_Booking extends TestBase {
     @BeforeSuite
     public void setupSuite() {
         super.setupSuite(Config.BOOKING_URL_BASE);
+        EnvironmentWriter.write(Config.BOOKING_URL_BASE, "QA");
         logger.info("ATC02 suite initialized");
     }
 
