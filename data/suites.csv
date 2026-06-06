@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sat Jun 06 00:37:47 UTC 2026","Sat Jun 06 00:37:49 UTC 2026","1096","API_Test_Suite","API Tests","test.api.ATC02_Booking","test.api.ATC02_Booking","updateBooking","updateBooking","POST /booking should update a resource and return 200 with the booking data"
+"passed","Sat Jun 06 00:37:45 UTC 2026","Sat Jun 06 00:37:47 UTC 2026","1890","API_Test_Suite","API Tests","test.api.ATC02_Booking","test.api.ATC02_Booking","createBooking","createBooking","Booking should create a resource and return 200 with the booking data"
+"passed","Sat Jun 06 00:37:49 UTC 2026","Sat Jun 06 00:37:49 UTC 2026","306","API_Test_Suite","API Tests","test.api.ATC02_Booking","test.api.ATC02_Booking","deleteBooking","deleteBooking","Booking should delete a resource and return 201"
