@@ -5,6 +5,17 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:          # ← esto habilita el botón "Run workflow"
+    inputs:
+      environment:
+        description: 'Environment to run tests against'
+        required: true
+        default: 'QA'
+        type: choice
+        options:
+          - QA
+          - DEV
+          - STAGING
 
 jobs:
   run-tests:
@@ -45,29 +56,28 @@ jobs:
         run: mvn clean test
 
       # Step 6 — Write environment metadata to allure-results
-      # This file must exist before Allure generates the HTML report
-      # so it appears in the ENVIRONMENT section of the Overview page
+      # Uses the selected environment if triggered manually, defaults to QA
       - name: Create Allure environment file
         if: always()
         run: |
           mkdir -p target/allure-results
           cat > target/allure-results/environment.properties << EOF
-          Environment=QA
+          Environment=${{ github.event.inputs.environment || 'QA' }}
           Base.URL=https://restful-booker.herokuapp.com
           Framework=API Automation Framework
           Author=Osiris Montiel Campos
           Java.Version=17
           OS=Ubuntu (GitHub Actions)
+          Triggered.By=${{ github.actor }}
+          Trigger=${{ github.event_name }}
           EOF
 
       # Step 7 — Generate the Allure HTML report from the raw results
-      # Output is placed under target/site/allure-maven-plugin/
       - name: Generate Allure Report
         if: always()
         run: mvn allure:report
 
       # Step 8 — Upload the Allure HTML report as a downloadable artifact
-      # Available in the Actions tab even if tests fail
       - name: Upload Allure Report
         if: always()
         uses: actions/upload-artifact@v4
@@ -77,7 +87,6 @@ jobs:
           retention-days: 30
 
       # Step 9 — Upload raw Allure results as a separate artifact
-      # Useful for historical trend analysis in future runs
       - name: Upload Allure Results
         if: always()
         uses: actions/upload-artifact@v4
@@ -87,7 +96,6 @@ jobs:
           retention-days: 30
 
       # Step 10 — Upload Surefire XML reports as a backup artifact
-      # Contains TestNG execution details in XML format
       - name: Upload surefire results
         if: always()
         uses: actions/upload-artifact@v4
@@ -97,8 +105,7 @@ jobs:
           retention-days: 30
 
       # Step 11 — Deploy the Allure HTML report to GitHub Pages
-      # Only runs on push to main, not on pull requests
-      # Published at: https://omontielc.github.io/automation-framework-back/
+      # Only runs on push to main or manual trigger, not on pull requests
       - name: Deploy Allure Report to GitHub Pages
         if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
