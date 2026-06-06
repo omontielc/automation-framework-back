@@ -30,7 +30,6 @@ jobs:
           distribution: 'temurin'
 
       # Step 3 — Cache Maven dependencies
-      # Saves download time on subsequent runs
       - name: Cache Maven packages
         uses: actions/cache@v4
         with:
@@ -42,11 +41,32 @@ jobs:
       - name: Run tests
         run: mvn clean test
 
-      # Step 5 — Upload test results as artifact
-      # Available for download in the Actions tab even if tests fail
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: target/surefire-reports/
+		# Step 5 — Generate Allure HTML report
+		- name: Generate Allure Report
+			if: always()
+		    run: mvn allure:report
+
+		# Step 6 — Upload Allure HTML report as artifact
+		- name: Upload Allure Report
+		 	if: always()
+			uses: actions/upload-artifact@v4
+			with:
+			name: allure-report
+			path: target/site/allure-maven-plugin/
+			retention-days: 30
+
+		#Step 7 — Keep surefire results también (backup)
+		- name: Upload surefire results
+			if: always()
+			uses: actions/upload-artifact@v4
+			with:
+			name: surefire-reports
+			path: target/surefire-reports/
+				 
+		# Step 8 — Deploy report to GitHub Pages
+		- name: Deploy Allure Report to GitHub Pages
+			if: github.ref == 'refs/heads/main'
+			uses: peaceiris/actions-gh-pages@v3
+			with:
+			github_token: ${{ secrets.GITHUB_TOKEN }}
+			publish_dir: target/site/allure-maven-plugin/
