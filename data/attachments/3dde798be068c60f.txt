@@ -1,0 +1,13 @@
+Status Code: 200
+
+{
+    "firstname": "Osiris",
+    "lastname": "Montiel",
+    "totalprice": 150,
+    "depositpaid": true,
+    "bookingdates": {
+        "checkin": "2026-01-01",
+        "checkout": "2026-01-07"
+    },
+    "additionalneeds": "Breakfast"
+}
