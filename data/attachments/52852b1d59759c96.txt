@@ -1,0 +1,5 @@
+Status Code: 200
+
+{
+    "token": "9c6869c2cdf3b60"
+}
