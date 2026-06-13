@@ -35,14 +35,15 @@ import util.TestBase;
 @Owner("Osiris Montiel Campos")
 public class ATC02_Booking extends TestBase {
 
-    private final BookingEndpoint booking = new BookingEndpoint();
+	private BookingEndpoint booking;
 
-    @BeforeSuite
-    public void setupSuite() {
-        super.setupSuite(Config.BOOKING_URL_BASE);
-        EnvironmentWriter.write(Config.BOOKING_URL_BASE, "QA");
-        logger.info("ATC02 suite initialized");
-    }
+	@BeforeSuite
+	public void setupSuite() {
+	    super.setupSuite(Config.BOOKING_URL_BASE);
+	    this.booking = new BookingEndpoint(this.baseUrl);
+	    EnvironmentWriter.write(Config.BOOKING_URL_BASE, "QA");
+	    logger.info("ATC02 suite initialized");
+	}
 
     // =========================================================
     // TC01 - Create Booking

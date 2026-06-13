@@ -30,6 +30,12 @@ public class BookingEndpoint {
     private static final Properties prop = new PropertiesHandle("API").getProperty();
     private static final String LOGIN_ENDPOINT    = prop.getProperty("API.login.endPoint");
     private static final String BOOKING_ENDPOINT  = prop.getProperty("API.booking.endPoint");
+    
+    private final String baseUrl;
+    
+    public BookingEndpoint(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
 
     // =========================================================
     // HTTP Operations
@@ -40,7 +46,7 @@ public class BookingEndpoint {
         try {
             logger.info("EndPoint {}", LOGIN_ENDPOINT);
             LoginRequest request = new LoginRequest(username, password);
-            Response response = given().spec(BaseApi.requestSpec()).body(request).when().post(LOGIN_ENDPOINT);
+            Response response = given().spec(BaseApi.requestSpec(baseUrl)).body(request).when().post(LOGIN_ENDPOINT);
             attachResponse("Login Response", response);
             attachHeaders(response);
             return response;
@@ -58,7 +64,7 @@ public class BookingEndpoint {
             logger.info("EndPoint {}", BOOKING_ENDPOINT);
             BookingRequest request = new BookingRequest(firstname, lastname, totalprice,
                     depositpaid, checkin, checkout, additionalneeds);
-            Response response = given().spec(BaseApi.requestSpec()).body(request).when().post(BOOKING_ENDPOINT);
+            Response response = given().spec(BaseApi.requestSpec(baseUrl)).body(request).when().post(BOOKING_ENDPOINT);
             attachResponse("Create Booking Response", response);
             attachHeaders(response);
             return response;
@@ -73,7 +79,7 @@ public class BookingEndpoint {
         try {
             logger.info("EndPoint {}", BOOKING_ENDPOINT);
             Response response = given()
-                    .spec(BaseApi.requestSpec())
+                    .spec(BaseApi.requestSpec(baseUrl))
                     .queryParam("firstname", firstname)
                     .when()
                     .get(BOOKING_ENDPOINT);
@@ -91,7 +97,7 @@ public class BookingEndpoint {
         try {
             logger.info("EndPoint {}", BOOKING_ENDPOINT);
             Response response = given()
-                    .spec(BaseApi.requestSpec())
+                    .spec(BaseApi.requestSpec(baseUrl))
                     .when()
                     .get(BOOKING_ENDPOINT + "/" + id);
             attachResponse("Get Booking By ID Response", response);
@@ -112,7 +118,7 @@ public class BookingEndpoint {
             BookingRequest request = new BookingRequest(firstname, lastname, totalprice,
                     depositpaid, checkin, checkout, additionalneeds);
             Response response = given()
-                    .spec(BaseApi.requestSpec())
+                    .spec(BaseApi.requestSpec(baseUrl))
                     .header("Cookie", "token=" + token)
                     .body(request)
                     .when()
@@ -131,7 +137,7 @@ public class BookingEndpoint {
         try {
             logger.info("EndPoint {}", BOOKING_ENDPOINT);
             Response response = given()
-                    .spec(BaseApi.requestSpec())
+                    .spec(BaseApi.requestSpec(baseUrl))
                     .header("Cookie", "token=" + token)
                     .when()
                     .delete(BOOKING_ENDPOINT + "/" + id);

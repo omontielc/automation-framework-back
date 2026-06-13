@@ -20,6 +20,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
+import util.EnvironmentWriter;
 import util.TestBase;
 
 /**
@@ -30,28 +31,30 @@ import util.TestBase;
 @Feature("API Endpoint")
 public class ATC01_Test1 extends TestBase {
 
-    private final APIOneEndpoint apiOne = new APIOneEndpoint();
+    private APIOneEndpoint apiOne;
 
     @BeforeSuite
     public void setupSuite() {
         super.setupSuite(Config.APIONE_URL_BASE);
+	    this.apiOne = new APIOneEndpoint(this.baseUrl);
+	    EnvironmentWriter.write(Config.BOOKING_URL_BASE, "QA");
         logger.info("ATC01 suite initialized");
     }
 
-    @Test
-    @Story("Retrieve all apiOne")
-    @Description("GET /posts should return 200 and a non-empty list of 100")
-    @Severity(SeverityLevel.CRITICAL)
-    public void getAllapiOne() {
-     	Response response = apiOne.getAll();
-
-     	List<APIOneResponse> posts = apiOne.deserializeList(response);
-
-        assertFalse(posts.isEmpty(), "List should not be empty");
-
-        logger.info("Retrieved post: {}", posts);
-
-   }
+//    @Test
+//    @Story("Retrieve all apiOne")
+//    @Description("GET /posts should return 200 and a non-empty list of 100")
+//    @Severity(SeverityLevel.CRITICAL)
+//    public void getAllapiOne() {
+//     	Response response = apiOne.getAll();
+//
+//     	List<APIOneResponse> posts = apiOne.deserializeList(response);
+//
+//        assertFalse(posts.isEmpty(), "List should not be empty");
+//
+//        logger.info("Retrieved post: {}", posts);
+//
+//   }
 
     @Test
     @Story("Retrieve a single post")

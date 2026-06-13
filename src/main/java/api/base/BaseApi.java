@@ -2,9 +2,7 @@ package api.base;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import io.qameta.allure.restassured.AllureRestAssured;
-import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -15,20 +13,22 @@ import io.restassured.specification.ResponseSpecification;
 /**
  * Base configuration for all API request/response specifications.
  * @author Osiris Montiel Campos
- * @version 2025-10-08
+ * @version 2025-11-12
  */
 public class BaseApi {
 
     private static final Logger logger = LogManager.getLogger(BaseApi.class);
 
     /**
-     * Builds and returns the base.
-     * @return configured ready to use
+     * Builds a request specification with an explicit baseUri.
+     *
+     * @param baseUri the base URL for the API under test
+     * @return configured RequestSpecification
      */
-    public static RequestSpecification requestSpec() {
-        logger.info("Building base request specification");
+    public static RequestSpecification requestSpec(String baseUri) {
+        logger.info("Building request specification for: {}", baseUri);
         return new RequestSpecBuilder()
-                .setBaseUri(RestAssured.baseURI)  // toma la URL que se configuró en @BeforeSuite
+                .setBaseUri(baseUri)
                 .setContentType(ContentType.JSON)
                 .addFilter(new AllureRestAssured())
                 .log(LogDetail.ALL)
@@ -36,21 +36,12 @@ public class BaseApi {
     }
 
     /**
-     * Builds and returns the base.
-     * @return configured ready to use
+     * Builds and returns the base response specification.
+     * @return configured ResponseSpecification
      */
     public static ResponseSpecification responseSpec() {
         return new ResponseSpecBuilder()
-                .log(LogDetail.ALL)                   // logs response to console
+                .log(LogDetail.ALL)
                 .build();
-    }
-
-    /**
-     * Configures RestAssured globally at suite startup.
-     */
-    public static void setup() {
-        RestAssured.requestSpecification  = requestSpec();
-        RestAssured.responseSpecification = responseSpec();
-        logger.info("RestAssured global configuration applied");
     }
 }

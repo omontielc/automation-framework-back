@@ -1,25 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+<testng-results ignored="0" total="10" passed="10" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-06-05T22:35:53 CST" name="API_Test_Suite" finished-at="2026-06-05T22:36:01 CST" duration-ms="7456">
+  <suite started-at="2026-06-12T17:53:47 CST" name="API_Test_Suite" finished-at="2026-06-12T17:53:56 CST" duration-ms="9504">
     <groups>
     </groups>
-    <test started-at="2026-06-05T22:35:53 CST" name="API Tests" finished-at="2026-06-05T22:36:01 CST" duration-ms="7456">
-      <class name="test.api.ATC02_Booking">
-        <test-method is-config="true" signature="setupSuite()[pri:0, instance:test.api.ATC02_Booking@6da54910]" started-at="2026-06-05T22:35:51 CST" name="setupSuite" finished-at="2026-06-05T22:35:53 CST" duration-ms="2444" status="PASS">
+    <test started-at="2026-06-12T17:53:47 CST" name="API Tests" finished-at="2026-06-12T17:53:56 CST" duration-ms="9504">
+      <class name="test.api.ATC01_Test1">
+        <test-method is-config="true" signature="setupSuite()[pri:0, instance:test.api.ATC01_Test1@62a54948]" started-at="2026-06-12T17:53:45 CST" name="setupSuite" finished-at="2026-06-12T17:53:46 CST" duration-ms="1395" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupSuite -->
-        <test-method signature="createBooking()[pri:0, instance:test.api.ATC02_Booking@6da54910]" started-at="2026-06-05T22:35:54 CST" name="createBooking" finished-at="2026-06-05T22:35:57 CST" duration-ms="3113" status="PASS">
+        <test-method signature="shouldCreatePost()[pri:0, instance:test.api.ATC01_Test1@62a54948]" started-at="2026-06-12T17:53:47 CST" name="shouldCreatePost" finished-at="2026-06-12T17:53:51 CST" duration-ms="4440" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldCreatePost -->
+        <test-method signature="shouldDeletePost()[pri:0, instance:test.api.ATC01_Test1@62a54948]" started-at="2026-06-12T17:53:51 CST" name="shouldDeletePost" finished-at="2026-06-12T17:53:51 CST" duration-ms="248" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldDeletePost -->
+        <test-method signature="shouldGetPostById()[pri:0, instance:test.api.ATC01_Test1@62a54948]" started-at="2026-06-12T17:53:51 CST" name="shouldGetPostById" finished-at="2026-06-12T17:53:52 CST" duration-ms="187" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldGetPostById -->
+        <test-method signature="shouldGetapiOneByUserId()[pri:0, instance:test.api.ATC01_Test1@62a54948]" started-at="2026-06-12T17:53:52 CST" name="shouldGetapiOneByUserId" finished-at="2026-06-12T17:53:52 CST" duration-ms="189" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldGetapiOneByUserId -->
+        <test-method signature="shouldMatchPostSchema()[pri:0, instance:test.api.ATC01_Test1@62a54948]" started-at="2026-06-12T17:53:52 CST" name="shouldMatchPostSchema" finished-at="2026-06-12T17:53:53 CST" duration-ms="1064" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldMatchPostSchema -->
+        <test-method signature="shouldReturn404ForNonExistentPost()[pri:0, instance:test.api.ATC01_Test1@62a54948]" started-at="2026-06-12T17:53:53 CST" name="shouldReturn404ForNonExistentPost" finished-at="2026-06-12T17:53:53 CST" duration-ms="165" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldReturn404ForNonExistentPost -->
+        <test-method signature="shouldUpdatePost()[pri:0, instance:test.api.ATC01_Test1@62a54948]" started-at="2026-06-12T17:53:53 CST" name="shouldUpdatePost" finished-at="2026-06-12T17:53:53 CST" duration-ms="281" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldUpdatePost -->
+      </class> <!-- test.api.ATC01_Test1 -->
+      <class name="test.api.ATC02_Booking">
+        <test-method is-config="true" signature="setupSuite()[pri:0, instance:test.api.ATC02_Booking@202d9236]" started-at="2026-06-12T17:53:46 CST" name="setupSuite" finished-at="2026-06-12T17:53:47 CST" duration-ms="76" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setupSuite -->
+        <test-method signature="createBooking()[pri:0, instance:test.api.ATC02_Booking@202d9236]" started-at="2026-06-12T17:53:47 CST" name="createBooking" finished-at="2026-06-12T17:53:51 CST" duration-ms="4352" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- createBooking -->
-        <test-method signature="updateBooking()[pri:0, instance:test.api.ATC02_Booking@6da54910]" started-at="2026-06-05T22:35:57 CST" name="updateBooking" finished-at="2026-06-05T22:35:59 CST" depends-on-methods="test.api.ATC02_Booking.createBooking" duration-ms="2611" status="PASS">
+        <test-method signature="updateBooking()[pri:0, instance:test.api.ATC02_Booking@202d9236]" started-at="2026-06-12T17:53:51 CST" name="updateBooking" finished-at="2026-06-12T17:53:54 CST" depends-on-methods="test.api.ATC02_Booking.createBooking" duration-ms="3170" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- updateBooking -->
-        <test-method signature="deleteBooking()[pri:0, instance:test.api.ATC02_Booking@6da54910]" started-at="2026-06-05T22:35:59 CST" name="deleteBooking" finished-at="2026-06-05T22:36:01 CST" depends-on-methods="test.api.ATC02_Booking.updateBooking" duration-ms="1530" status="PASS">
+        <test-method signature="deleteBooking()[pri:0, instance:test.api.ATC02_Booking@202d9236]" started-at="2026-06-12T17:53:54 CST" name="deleteBooking" finished-at="2026-06-12T17:53:56 CST" depends-on-methods="test.api.ATC02_Booking.updateBooking" duration-ms="1754" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- deleteBooking -->

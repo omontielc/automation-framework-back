@@ -28,12 +28,18 @@ public class APIOneEndpoint {
     private static final Logger logger = LogManager.getLogger(APIOneEndpoint.class);
     private static final Properties prop = new PropertiesHandle("API").getProperty();
     private static final String ENDPOINT = prop.getProperty("API.apiOne.endPoint");
+    
+    private final String baseUrl;
+    
+    public APIOneEndpoint(String baseUrl) {
+		this.baseUrl = baseUrl;
+	}
 
     //metodo para crear un post
 	public Response createe(APIOneRequest request) {
 		try {
 			logger.info("POST {}", ENDPOINT);
-			return given().spec(BaseApi.requestSpec()).body(request).when().post(ENDPOINT);
+			return given().spec(BaseApi.requestSpec(baseUrl)).body(request).when().post(ENDPOINT);
 		} catch (Exception e) {
 			logger.error("POST failed: {}", e.getMessage());
 			throw new RuntimeException("POST " + ENDPOINT + " failed", e);
@@ -49,7 +55,7 @@ public class APIOneEndpoint {
     public Response getAll() {
     	try {
             logger.info("GET {}", ENDPOINT);
-            return given().spec(BaseApi.requestSpec()).when().get(ENDPOINT);
+            return given().spec(BaseApi.requestSpec(baseUrl)).when().get(ENDPOINT);
         } catch (Exception e) {
             logger.error("GET all posts failed: {}", e.getMessage());
             throw new RuntimeException("GET " + ENDPOINT + " failed", e);
@@ -70,7 +76,7 @@ public class APIOneEndpoint {
         }
         try {
             logger.info("GET {}/{}", ENDPOINT, id);
-            return given().spec(BaseApi.requestSpec()).when().get(ENDPOINT + "/" + id);
+            return given().spec(BaseApi.requestSpec(baseUrl)).when().get(ENDPOINT + "/" + id);
         } catch (Exception e) {
             logger.error("GET by id failed for id {}: {}", id, e.getMessage());
             throw new RuntimeException("GET " + ENDPOINT + "/" + id + " failed", e);
@@ -91,7 +97,7 @@ public class APIOneEndpoint {
         }
         try {
             logger.info("GET {}?userId={}", ENDPOINT, userId);
-            return given().spec(BaseApi.requestSpec()).queryParam("userId", userId).when().get(ENDPOINT);
+            return given().spec(BaseApi.requestSpec(baseUrl)).queryParam("userId", userId).when().get(ENDPOINT);
         } catch (Exception e) {
             logger.error("GET by userId failed for userId {}: {}", userId, e.getMessage());
             throw new RuntimeException("GET " + ENDPOINT + "?userId=" + userId + " failed", e);
@@ -110,7 +116,7 @@ public class APIOneEndpoint {
         }
         try {
             logger.info("POST {} — body: {}", ENDPOINT, postRequest.getTitle());
-            return given().spec(BaseApi.requestSpec()).body(postRequest).when().post(ENDPOINT);
+            return given().spec(BaseApi.requestSpec(baseUrl)).body(postRequest).when().post(ENDPOINT);
         } catch (Exception e) {
             logger.error("POST failed — title: {}: {}", postRequest.getTitle(), e.getMessage());
             throw new RuntimeException("POST " + ENDPOINT + " failed", e);
@@ -135,7 +141,7 @@ public class APIOneEndpoint {
         }
         try {
             logger.info("PUT {}/{}", ENDPOINT, id);
-            return given().spec(BaseApi.requestSpec()).body(postRequest).when().put(ENDPOINT + "/" + id);
+            return given().spec(BaseApi.requestSpec(baseUrl)).body(postRequest).when().put(ENDPOINT + "/" + id);
         } catch (Exception e) {
             logger.error("PUT failed for id {}: {}", id, e.getMessage());
             throw new RuntimeException("PUT " + ENDPOINT + "/" + id + " failed", e);
@@ -156,7 +162,7 @@ public class APIOneEndpoint {
         }
         try {
             logger.info("DELETE {}/{}", ENDPOINT, id);
-            return given().spec(BaseApi.requestSpec()).when().delete(ENDPOINT + "/" + id);
+            return given().spec(BaseApi.requestSpec(baseUrl)).when().delete(ENDPOINT + "/" + id);
         } catch (Exception e) {
             logger.error("DELETE failed for id {}: {}", id, e.getMessage());
             throw new RuntimeException("DELETE " + ENDPOINT + "/" + id + " failed", e);
