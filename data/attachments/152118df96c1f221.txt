@@ -1,5 +1,0 @@
-Status Code: 200
-
-{
-    "token": "47c000e8a83411b"
-}
