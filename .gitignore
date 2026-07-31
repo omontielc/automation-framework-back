@@ -2,6 +2,13 @@
 target/
 *.class
 
+# IDE
+.idea/
+
+# Test outputs
+test-output/
+*.log
+
 # Allure
 allure-results/
 allure-report/
